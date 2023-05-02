@@ -1,9 +1,14 @@
 from django.db import models
 from core.models import Product
+from simple_history.models import HistoricalRecords
 
 
 class Language(models.Model):
     name = models.CharField(max_length=100)
+    history = HistoricalRecords()
+
+    def __str__(self):
+        return self.name
 
     class Meta:
         db_table = 'language'
@@ -23,6 +28,7 @@ class ProductLanguage(models.Model):
     interface = models.BooleanField(default=True)
     subtitles = models.BooleanField(default=True)
     voice = models.BooleanField(default=True)
+    history = HistoricalRecords()
 
     class Meta:
         db_table = 'product_language'
